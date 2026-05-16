@@ -37,6 +37,7 @@ Na pasta [boards/shields](./boards/shields/) você encontra "shields".
 "Shields" são customizações adicionais que originam do hardware.
 
 Nela você encontrará as shields:
+
 - `dongle_display`, que configura uma tela para o receptor
 - `sofle`, que cria as **metades** do teclado.
 
@@ -63,3 +64,26 @@ Para você entender a essência dos arquivos presentes nesse repositório:
 A pasta `.github` contém configurações que fazem com que uma "action" para compilar o firmware seja executada automaticamente ao dar push no repositório.
 
 O arquivo [build.yaml](./build.yaml) especifica o que deve ser compilado e com quais configurações.
+
+## Modo experimental para dois dongles
+
+Este repositório habilita um modo experimental para as metades do split manterem
+mais de um bond de central e alternarem a busca de reconexão:
+
+- `CONFIG_ZMK_SPLIT_PERIPHERAL_MAX_BONDS=4`
+- `CONFIG_ZMK_SPLIT_PERIPHERAL_ADV_ROTATION_INTERVAL=5`
+
+Essas opções estão em [config/sofle.conf](./config/sofle.conf).
+
+### Como usar com dois dongles
+
+1. Grave o firmware atualizado em ambas as metades e nos dois dongles.
+2. Faça o pareamento com o dongle A (casa).
+3. Depois, com o dongle A desligado, faça o pareamento com o dongle B (trabalho/viagem).
+4. No dia a dia, mantenha apenas um dongle ligado por vez.
+
+### Limites importantes
+
+- É um comportamento experimental do split BLE.
+- Não use os dois dongles ligados ao mesmo tempo perto das metades.
+- Se houver confusão de bond, use o firmware de reset e refaça os pareamentos.
