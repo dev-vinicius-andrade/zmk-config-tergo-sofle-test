@@ -1,0 +1,11 @@
+﻿backup_name=20260517-173748
+created_at=2026-05-17T17:37:48.0798135-03:00
+repo_root=E:\repos\github\dev-vinicius-andrade\zmk-config-tergo-sofle-test
+git_toplevel=E:/repos/github/dev-vinicius-andrade/zmk-config-tergo-sofle-test
+git_branch=master
+git_commit=a3d8bdb068e1964d6ab6abb69d79d95e7f72eae7
+git_status_start
+ M README.md
+?? exports/
+?? scripts/
+git_status_end
