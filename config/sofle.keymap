@@ -120,7 +120,7 @@
             bindings = <
 &trans  &kp F1         &kp F2        &kp F3         &kp F4                    &kp F5                                       &kp F6      &kp F7        &kp F8        &kp F9         &kp F10          &kp F11
 &trans  &kp GRAVE      &kp LS(N6)    &kp KP_PLUS    &kp LS(LEFT_BRACKET)      &kp LS(RIGHT_BRACKET)                        &kp HOME    &kp END       &kp PAGE_UP   &kp PAGE_DOWN  &kp INS          &kp F12
-&trans  &kp LS(GRAVE)  &kp EQUAL     &kp KP_MINUS   &kp LS(LEFT_PARENTHESIS)  &kp LS(RIGHT_PARENTHESIS)                    &kp LEFT    &kp DOWN      &kp UP_ARROW  &kp RIGHT      &kp PSCRN        &none
+&trans  &kp LS(GRAVE)  &kp EQUAL     &kp KP_MINUS   &kp LS(LEFT_PARENTHESIS)  &kp LS(RIGHT_PARENTHESIS)                    &kp LEFT    &kp DOWN      &kp UP_ARROW  &kp RIGHT      &kp PSCRN        &kp APOS
 &trans  &kp NUBS       &kp LS(NUBS)  &kp LS(MINUS)  &kp LBKT                  &kp RBKT                   &trans    &trans  &kp CAPS    &kp LC(LEFT)  &kp ESC       &kp LC(RIGHT)  &kp PAUSE_BREAK  &none
                        &trans        &trans         &trans                    &trans                     &trans    &trans  &kp DELETE  &trans        &trans        &trans
             >;
@@ -131,11 +131,11 @@
         adjust_layer {
             display-name = "Confg";
             bindings = <
-&studio_unlock  &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &none   &none   &none           &none   &none  &none
-&none           &none             &none             &none         &none         &none                           &none   &none   &bt BT_CLR_ALL  &none   &none  &none
-&none           &none             &none             &out OUT_TOG  &none         &none                           &none   &none   &bt BT_CLR      &none   &none  &none
-&bootloader     &none             &to BASE          &to ADEPT     &to OTHER     &none         &trans    &trans  &none   &none   &none           &none   &none  &bootloader
-                                  &trans            &trans        &trans        &trans        &trans    &trans  &trans  &trans  &trans          &trans
+&studio_unlock  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &none   &none   &none           &none   &none  &none
+&none           &none         &none         &none         &none         &none                           &none   &none   &bt BT_CLR_ALL  &none   &none  &none
+&none           &none         &none         &out OUT_TOG  &none         &none                           &none   &none   &bt BT_CLR      &none   &none  &none
+&bootloader     &none         &to BASE      &to ADEPT     &to OTHER     &none         &trans    &trans  &none   &none   &none           &none   &none  &bootloader
+                              &trans        &trans        &trans        &trans        &trans    &trans  &trans  &trans  &trans          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
