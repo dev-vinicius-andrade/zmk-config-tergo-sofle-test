@@ -65,25 +65,95 @@ A pasta `.github` contém configurações que fazem com que uma "action" para co
 
 O arquivo [build.yaml](./build.yaml) especifica o que deve ser compilado e com quais configurações.
 
-## Modo experimental para dois dongles
+## Suporte a múltiplos dongles
 
-Este repositório habilita um modo experimental para as metades do split manterem
-mais de um bond de central e alternarem a busca de reconexão:
+Este repositório habilita suporte experimental para as metades do teclado parearem com **até 3 dongles diferentes**, alternando automaticamente entre eles por disponibilidade.
 
-- `CONFIG_ZMK_SPLIT_PERIPHERAL_MAX_BONDS=4`
-- `CONFIG_ZMK_SPLIT_PERIPHERAL_ADV_ROTATION_INTERVAL=5`
+Ideal para quem usa:
+- Um dongle no **trabalho**
+- Um dongle em **casa**
+- Um dongle para **viagens**
 
-Essas opções estão em [config/sofle.conf](./config/sofle.conf).
+A configuração está em [config/sofle.conf](./config/sofle.conf):
 
-### Como usar com dois dongles
+```conf
+CONFIG_ZMK_SPLIT_PERIPHERAL_DONGLE_PROFILES=3
+```
 
-1. Grave o firmware atualizado em ambas as metades e nos dois dongles.
-2. Faça o pareamento com o dongle A (casa).
-3. Depois, com o dongle A desligado, faça o pareamento com o dongle B (trabalho/viagem).
-4. No dia a dia, mantenha apenas um dongle ligado por vez.
+Aumente esse número (máximo 5) para suportar mais dongles.
 
-### Limites importantes
+---
 
-- É um comportamento experimental do split BLE.
-- Não use os dois dongles ligados ao mesmo tempo perto das metades.
-- Se houver confusão de bond, use o firmware de reset e refaça os pareamentos.
+### Firmwares disponíveis
+
+| Artifact | Descrição |
+|---|---|
+| `sofle_dongle_display_international` | Dongle **com display**, layout internacional |
+| `sofle_dongle_display_abnt2` | Dongle **com display**, layout ABNT2 |
+| `sofle_dongle_no_display_international` | Dongle **sem display**, layout internacional |
+| `sofle_dongle_no_display_abnt2` | Dongle **sem display**, layout ABNT2 |
+| `sofle_left` | Metade esquerda do teclado |
+| `sofle_right` | Metade direita do teclado |
+| `reset-firmware` | Firmware de reset (apaga bonds e configurações) |
+
+---
+
+### Como parear do zero (todos os dongles)
+
+> [!IMPORTANT]
+> Este processo apaga todos os bonds existentes. Realize apenas quando precisar adicionar/refazer dongles.
+
+#### Passo 1 — Zere tudo
+
+1. Grave o `reset-firmware` no **dongle 1**, aguarde ele inicializar e desligue.
+2. Grave o `reset-firmware` no **dongle 2**, aguarde ele inicializar e desligue.
+3. Grave o `reset-firmware` no **dongle 3**, aguarde ele inicializar e desligue.
+4. Grave o `reset-firmware` na **metade esquerda**, aguarde ela inicializar.
+5. Grave o `reset-firmware` na **metade direita**, aguarde ela inicializar.
+
+#### Passo 2 — Grave o firmware definitivo
+
+Com **todos os dongles desligados** e **teclado desconectado**:
+
+1. Grave o firmware correto no **dongle 1** e desligue.
+2. Grave o firmware correto no **dongle 2** e desligue.
+3. Grave o firmware correto no **dongle 3** e desligue.
+4. Grave o firmware na **metade esquerda**.
+5. Grave o firmware na **metade direita**.
+6. Desconecte as metades (desligue ou retire o cabo).
+
+#### Passo 3 — Pareamento com o dongle 1
+
+1. Ligue **apenas o dongle 1**.
+2. Conecte as duas metades ao computador (ou ligue-as por bateria).
+3. Aguarde a conexão — as metades irão parear automaticamente com o dongle 1.
+4. Teste as teclas.
+5. Desligue as metades.
+
+#### Passo 4 — Pareamento com o dongle 2
+
+1. Desligue o **dongle 1**, ligue o **dongle 2**.
+2. Ligue as metades novamente.
+3. Aguarde a conexão — as metades irão parear automaticamente com o dongle 2.
+4. Teste as teclas.
+5. Desligue as metades.
+
+#### Passo 5 — Pareamento com o dongle 3
+
+1. Desligue o **dongle 2**, ligue o **dongle 3**.
+2. Ligue as metades novamente.
+3. Aguarde a conexão — as metades irão parear automaticamente com o dongle 3.
+4. Teste as teclas.
+
+Pronto. Os três dongles estão pareados.
+
+---
+
+### Uso no dia a dia
+
+- Ligue **apenas um dongle por vez**. As metades detectam qual dongle está disponível e conectam automaticamente.
+- Nunca ligue dois dongles simultaneamente próximos às metades — isso causa conflito de bond.
+- Não é necessário refazer o pareamento ao trocar de dongle.
+
+> [!WARNING]
+> Se as metades pararem de conectar em algum dongle após uma atualização de firmware, repita o processo completo de pareamento a partir do Passo 1.
