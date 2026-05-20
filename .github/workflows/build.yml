@@ -27,10 +27,17 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
+      - name: Create firmware zip bundle
+        run: |
+          cd firmware
+          zip -r ../firmware.zip . -i "*.uf2"
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.date.outputs.date }}-${{ github.run_number }}
           name: "Firmware ${{ steps.date.outputs.date }} (build #${{ github.run_number }})"
           generate_release_notes: true
-          files: firmware/**/*.uf2
+          files: |
+            firmware/**/*.uf2
+            firmware.zip
